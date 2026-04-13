@@ -3,27 +3,27 @@
 # Dark Luxury Editorial Web Skill
 
 Not for pasting travel notes onto a webpage.  
-For turning travel material into a site that actually feels worth sharing.
+For turning travel material into a site people actually want to open, scroll through, listen to, and share.
 
-This skill is built for the very common situation where the content is good, the taste is there, but the finished page somehow still looks flat, generic, or stitched together.  
-It does not only care about copy placement. It cares about the Hero, the next screen, the images, the tags, the music, the mobile layout, and even the build size.
+It is built for a very familiar and very annoying situation:  
+the source material is good, the taste is there, but the moment a generic generator touches it, the result becomes a dark background, a few paragraphs, a few mismatched images, and a Hero that does not belong to the screen below it.
 
 ## What Problem Does It Solve?
 
-Most travel pages do not fail because the content is bad.  
-They fail because of things like:
+If you have ever tried to make a travel microsite, you have probably run into some version of this:
 
-- the Hero and the next section feel like two disconnected slabs
-- AI can generate a page, but it often ends up as “dark background plus some text”
-- tags are vague, images are semantically off, and timelines feel stiff or template-like
-- the desktop version looks acceptable, but mobile immediately falls apart
-- background music, asset sourcing, and font payload issues show up at the worst possible moment
+- the writing exists, but the page still has no cover-worthy presence
+- the Hero and the second screen have a visible seam, so the illusion breaks on scroll
+- the timeline, tags, and imagery exist, but they feel generic or semantically wrong
+- desktop survives, but mobile exposes weak hierarchy and bad optical balance immediately
+- music, asset sourcing, and font payload problems appear right before shipping
 
-This skill exists to turn those recurring problems into explicit rules before they become rework.
+This skill is not just “one more page generator.”  
+It turns those recurring failure points into explicit rules and a reusable workflow.
 
 ## When Would You Actually Use It?
 
-### 1. You already have a route guide and want to turn it into a site
+### 1. You already have the guide, and you need a site that feels worth sharing
 
 Maybe your input is:
 
@@ -32,15 +32,15 @@ Maybe your input is:
 - a Word / DOCX file
 - a cleaned-up chat log
 
-You do not just want to “publish it as a webpage.”  
+You do not just want to “put it online.”  
 You want:
 
 - a strong cover-led first screen
 - a seamless transition into the second screen
-- clear daily structure without losing atmosphere
-- something polished enough to send to friends without apologizing first
+- clear day structure without killing the mood
+- something polished enough to send to friends without having to say “ignore the design”
 
-### 2. You only have a travel intention, not a finished itinerary
+### 2. You only have an intention, not a finished route guide
 
 Maybe you only know:
 
@@ -49,15 +49,15 @@ Maybe you only know:
 - what kind of mood you want
 - roughly what budget you have
 
-This skill can help turn that into a complete route guide first, then into a real editorial travel page.  
-In other words, it can support both planning and presentation.
+In that case, this skill is not only a presentation tool.  
+It can help shape the route guide first, then turn it into a real editorial travel page.
 
-### 3. You have a first-person travel memoir and want to keep the original voice
+### 3. You have a first-person memoir and do not want AI to sand your voice away
 
-Many tools flatten memoir writing into a tidy but lifeless summary.  
-This skill explicitly separates route-guide mode from memoir mode, so the structure can improve without washing the author out of the page.
+Many tools flatten memoir writing into something tidy, readable, and completely unlike the original author.  
+This skill explicitly separates route-guide mode from memoir mode, so the structure can improve without erasing the voice.
 
-### 4. You already have a half-finished travel site, but it still feels off
+### 4. You already have a half-finished site, but it still feels off
 
 This is exactly the kind of cleanup it is good at:
 
@@ -70,61 +70,26 @@ This is exactly the kind of cleanup it is good at:
 
 ## How Does It Help?
 
-### Step 1: It identifies what kind of input you gave it
+Its workflow is simple, but practical:
 
-It distinguishes between:
+1. It identifies whether your source is a travel intention, a route guide, or a first-person memoir
+2. It structures the content before styling it: Hero, day flow, timeline nodes, place / food tags, transport, stay, prep, and budget all get normalized first
+3. It writes the shot list before the polish pass, then sources imagery and atmosphere early instead of treating visuals like a last-minute patch
+4. It checks the things that usually break the illusion: Hero transitions, timeline geometry, tag semantics, music state, mobile hierarchy, and font payload
 
-- travel intent
-- route guide
-- first-person memoir
+## How Would You Actually Use It?
 
-Because those should not be forced into the same page structure.
-
-### Step 2: It structures the content before styling it
-
-It pulls out things like:
-
-- Hero title and subtitle
-- day structure
-- timeline nodes
-- place / food tags
-- supporting modules such as packing, transport, stay, food, and budget
-
-The logic gets cleaned up before the polish begins.
-
-### Step 3: It treats imagery as part of the architecture
-
-This skill expects you to:
-
-- define a shot list first
-- source imagery early
-- store the chosen assets locally
-- then build the Hero and next-screen continuity around those real assets
-
-So the page does not end up asking for good images after the layout is already locked.
-
-### Step 4: It watches the details that usually make or break the result
-
-It explicitly checks:
-
-- whether the Hero-to-next-screen transition shows a seam
-- whether the timeline line pierces the node
-- whether tags are concrete place / food labels instead of filler
-- whether music UI matches real playback state
-- whether the mobile hierarchy, line-height, and center of gravity still hold
-- whether Chinese font choices are quietly wrecking the build output
+- Drop in a Feishu / Notion / Word / chat-based route guide and let it turn that into a travel site
+- Give it only “from where to where, how many days, what mood, what budget” and let it build the route guide before the page
+- Use it to rescue a half-finished travel microsite that still feels too generic
+- Use it as the baseline workflow for your own travel-web agent
 
 ## Why Is It Better Than a Generic Page Generator?
 
 Because it does not stop at “make it look premium.”  
-It encodes the kinds of problems that show up again and again in real travel projects and turns them into an operational workflow.
+It encodes the kinds of issues that come up in real travel projects and turns them into a working production system.
 
-It is a good fit if your goal sounds like this:
-
-- I want a travel page that does not feel AI-generic
-- I want consistent taste without re-debugging the Hero every time
-- I want one system that can handle both itineraries and memoirs
-- I want a skill that can survive a real cold-start test, not just generate instructions
+In practice, it behaves less like a page prompt and more like a travel-web producer who already knows where the project is most likely to go wrong.
 
 ## Real Outputs
 
@@ -187,13 +152,11 @@ These are real project outputs from the benchmark family and cold-start validati
 - `dist/dark-luxury-editorial-web-skill.skill`
   Packaged installable artifact
 
-## How Can You Use It?
+## Common Ways To Use It
 
-The most common ways are:
-
-1. Install the `.skill` artifact and use it directly in new travel-web projects
-2. Use `SKILL.md + references/` as an editable workflow baseline
-3. Use it to calibrate your own travel-web agent so it stops producing template-looking itinerary pages
+1. Install the `.skill` artifact and use it directly for new travel-web projects
+2. Use `SKILL.md + references/` as your editable SOP baseline
+3. Use it to calibrate your own travel-web agent so it stops producing template-looking pages
 
 ## Install Artifact
 
