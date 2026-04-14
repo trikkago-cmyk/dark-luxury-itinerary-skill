@@ -117,15 +117,6 @@
 - `dist/dark-luxury-itinerary-skill.skill`
   打包好的可安装 `.skill` 文件
 
-## 最常见的使用方式
-
-1. 直接导入 `.skill` 文件
-2. 或者把 `SKILL.md + references/` 当作你自己的规则母版
-3. 然后直接给它旅行需求，让它开始生成
-
-## 安装文件
-
-- `dist/dark-luxury-itinerary-skill.skill`
 
 ## 仓库结构
 
