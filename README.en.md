@@ -4,104 +4,11 @@
 
 # Dark Luxury Editorial Web Skill
 
-Not for pasting travel notes onto a webpage.  
-For turning travel material into a site people actually want to open, scroll through, listen to, and share.
+**What is it?**  
+An all-in-one skill that turns trip requirements into a polished route guide and a shareable editorial travel page.  
+One-line promise: give it your travel needs, get a beautiful itinerary site in one go.
 
-It is built for a very familiar and very annoying situation:  
-the source material is good, the taste is there, but the moment a generic generator touches it, the result becomes a dark background, a few paragraphs, a few mismatched images, and a Hero that does not belong to the screen below it.
-
-## What Problem Does It Solve?
-
-If you have ever tried to make a travel microsite, you have probably run into some version of this:
-
-- the writing exists, but the page still has no cover-worthy presence
-- the Hero and the second screen have a visible seam, so the illusion breaks on scroll
-- the timeline, tags, and imagery exist, but they feel generic or semantically wrong
-- desktop survives, but mobile exposes weak hierarchy and bad optical balance immediately
-- music, asset sourcing, and font payload problems appear right before shipping
-
-This skill is not just “one more page generator.”  
-It turns those recurring failure points into explicit rules and a reusable workflow.
-
-## Highlights
-
-- Foolproof: give it a few trip requirements, and it delivers a full route guide plus a publishable site
-- Beautiful: editorial magazine aesthetics with nearly zero “AI UI” feel, plus built-in ambient music
-
-## Who It’s For
-
-- Families planning trips who want it to be effortless but still polished
-- Independent travel agencies or small studios showcasing curated routes
-
-## When Would You Actually Use It?
-
-### 1. You already have the guide, and you need a site that feels worth sharing
-
-Maybe your input is:
-
-- a Feishu doc
-- a Notion page
-- a Word / DOCX file
-- a cleaned-up chat log
-
-You do not just want to “put it online.”  
-You want:
-
-- a strong cover-led first screen
-- a seamless transition into the second screen
-- clear day structure without killing the mood
-- something polished enough to send to friends without having to say “ignore the design”
-
-### 2. You only have an intention, not a finished route guide
-
-Maybe you only know:
-
-- from where to where
-- how many days
-- what kind of mood you want
-- roughly what budget you have
-
-In that case, this skill is not only a presentation tool.  
-It can help shape the route guide first, then turn it into a real editorial travel page.
-
-### 3. You have a first-person memoir and do not want AI to sand your voice away
-
-Many tools flatten memoir writing into something tidy, readable, and completely unlike the original author.  
-This skill explicitly separates route-guide mode from memoir mode, so the structure can improve without erasing the voice.
-
-### 4. You already have a half-finished site, but it still feels off
-
-This is exactly the kind of cleanup it is good at:
-
-- fixing Hero / second-screen seams
-- simplifying heavy or awkward timelines
-- correcting visual centering and hierarchy
-- forcing tags and imagery back into semantic alignment
-- making the music control feel integrated instead of bolted on
-- keeping font choices from silently bloating the build
-
-## How Does It Help?
-
-Its workflow is simple, but practical:
-
-1. It identifies whether your source is a travel intention, a route guide, or a first-person memoir
-2. It structures the content before styling it: Hero, day flow, timeline nodes, place / food tags, transport, stay, prep, and budget all get normalized first
-3. It writes the shot list before the polish pass, then sources imagery and atmosphere early instead of treating visuals like a last-minute patch
-4. It checks the things that usually break the illusion: Hero transitions, timeline geometry, tag semantics, music state, mobile hierarchy, and font payload
-
-## How Would You Actually Use It?
-
-- Drop in a Feishu / Notion / Word / chat-based route guide and let it turn that into a travel site
-- Give it only “from where to where, how many days, what mood, what budget” and let it build the route guide before the page
-- Use it to rescue a half-finished travel microsite that still feels too generic
-- Use it as the baseline workflow for your own travel-web agent
-
-## Why Is It Better Than a Generic Page Generator?
-
-Because it does not stop at “make it look premium.”  
-It encodes the kinds of issues that come up in real travel projects and turns them into a working production system.
-
-In practice, it behaves less like a page prompt and more like a travel-web producer who already knows where the project is most likely to go wrong.
+**Product Screens**
 
 ## Real Outputs
 
@@ -149,6 +56,28 @@ These are real project outputs from the benchmark family and cold-start validati
     </td>
   </tr>
 </table>
+
+## What Problems Does It Solve?
+
+**Scenario: You have content, but the page still feels generic**  
+Solution: structure, imagery, tags, music, and layout are aligned in one pass so it stops looking like a template.
+
+**Scenario: You only have intent, not a route guide**  
+Solution: input “from/to, days, mood, budget” and it builds the route guide before generating the page.
+
+**Highlights**
+- Foolproof: simple inputs generate both the route guide and a publishable site
+- Beautiful: editorial magazine aesthetics with almost zero “AI UI” feel, plus built-in ambient music
+
+**Who It’s For**
+- Families planning trips who want it effortless but polished
+- Independent travel agencies or small studios showcasing curated routes
+
+## How Do I Use It?
+
+1. Install `dist/dark-luxury-editorial-web-skill.skill`
+2. Invoke the skill in Cursor and provide your trip requirements or existing guide
+3. Generate and deploy the travel page
 
 ## What’s In This Repository?
 
