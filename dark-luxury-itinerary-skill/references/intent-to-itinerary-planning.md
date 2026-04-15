@@ -63,6 +63,195 @@ When researching a destination, actively search across multiple user intents ins
 - 亲子 / 长辈 / 情侣 / 朋友出游
 - 雨天替代 / 夜间去处 / 临时 Plan B
 
+### Search template pack
+
+Do not stop at one generic query like `杭州 两天一夜 攻略`.
+Build a small query matrix and cover at least these buckets:
+
+- official facts and access
+  - `[destination] [season/date] 天气`
+  - `[origin] 到 [destination] 高铁 / 飞机 / 自驾 多久`
+  - `[place] 官网 开放时间 门票 预约`
+  - `[place] 官方 名称 地址`
+- route fit and travel style
+  - `[destination] citywalk 慢节奏`
+  - `[destination] 少折返 路线`
+  - `[destination] 拍照 出片 最佳时段`
+  - `[destination] 本地人推荐`
+- pruning and anti-hype
+  - `[destination] 避坑`
+  - `[destination] 不推荐`
+  - `[place] 值不值得去`
+  - `[place] 排队 人多`
+- weather and Plan B
+  - `[destination] 雨天 替代`
+  - `[destination] 室内 去处`
+  - `[destination] 夜间 去处`
+  - `[seasonal attraction] 几月 最好`
+- food and lodging
+  - `[destination] 本地小吃 推荐`
+  - `[district] 杭帮菜 / 早饭 / 夜宵 推荐`
+  - `[destination] 住哪里 方便`
+  - `[destination] 哪个片区 少折返`
+
+If Xiaohongshu or other public UGC is part of the mix, adapt the same buckets instead of free-searching at random.
+Good default patterns are:
+
+- `[destination] + [bucket keyword] + site:xiaohongshu.com`
+- `[place] + [bucket keyword] + 小红书`
+- `[destination] + [food / district] + 本地人推荐`
+
+At minimum, the planner should cover:
+
+- 1 official fact bucket
+- 1 route-fit bucket
+- 1 pruning bucket
+- 1 weather / Plan B bucket
+- 1 food or lodging bucket
+
+### Required research record
+
+When the user gives only a travel intent, the planner should leave an explicit research record before moving on to webpage polish.
+For cold-start validation, this record is mandatory and should be output in the generated planning artifact or validation report.
+
+Minimum template:
+
+```md
+## Research record
+
+### Official / primary sources checked
+- [source name] - what it verified
+- [source name] - what it verified
+
+### Stable web / map sources checked
+- [source name] - what it verified
+- [map product] - branch / entrance / transit / live-status check
+
+### UGC query buckets used
+- [query or bucket]
+- [query or bucket]
+- [query or bucket]
+
+### Keep decisions
+- [place]
+  - keep because:
+  - factual confidence:
+  - recommendation confidence:
+
+### Drop or demote decisions
+- [place]
+  - drop / backup because:
+  - factual confidence:
+  - recommendation confidence:
+```
+
+At minimum, the record must show:
+
+- which official sources were actually checked
+- which UGC keywords or buckets were actually used
+- why each major stop stayed in the route
+- why obvious alternatives were dropped, demoted, or held as backup
+
+### Confidence ladder
+
+Treat confidence as an execution rule, not a vague feeling.
+Use two parallel checks:
+
+- factual confidence
+  - can I trust the fact itself
+- recommendation confidence
+  - even if the place is real, is it strong enough to deserve route time
+
+#### Factual confidence
+
+- High
+  - official / primary source confirms it
+  - or one stable source plus a map-backed live status clearly agree
+- Medium
+  - map-backed and repeated stable-web signals exist, but no direct official confirmation
+  - acceptable for soft recommendations, but not for fragile time anchors without a caveat
+- Low
+  - only one UGC hit, stale mention, or conflicting sources
+  - do not build the route around it
+
+#### Recommendation confidence
+
+- High
+  - the place is real and reachable
+  - it fits the declared trip style
+  - the detour cost is low or clearly justified
+  - at least two independent signals support its value
+- Medium
+  - the place is plausible and usable, but the fit is less universal, more seasonal, or slightly detoured
+  - keep it as optional or mark the tradeoff
+- Low
+  - the place is mostly hype-driven, branch status is unclear, or the transit burden is too high for the payoff
+  - move it to backup or drop it
+
+Promotion rule:
+
+- keep a stop in the main route only when factual confidence is at least `Medium`
+  and recommendation confidence is at least `Medium`
+- if factual confidence is `Low`, it cannot become a timed anchor
+- if recommendation confidence is `Low`, it should not stay in the core route
+
+### Default map stack and transit calibration
+
+Use a default map stack so route quality does not depend on ad hoc tool choice.
+
+For mainland-China destinations:
+
+1. official venue / scenic / transport source
+   - canonical name
+   - opening status
+   - ticket / reservation rules
+2. Amap / Gaode
+   - branch existence
+   - entrance / exit reality
+   - live operating markers
+   - walking / taxi / transit estimates
+3. Baidu Maps or Apple Maps as tie-breaker
+   - only when Amap is ambiguous or a branch looks suspicious
+
+For destinations outside mainland China:
+
+1. official venue / scenic / transport source
+2. Google Maps or the dominant local map product
+3. OpenStreetMap or a secondary map only as cross-check
+
+If map and official information still conflict:
+
+- downgrade factual confidence
+- do not let the disputed place anchor the day
+- prefer a cleaner nearby alternative
+
+Default thresholds for relaxed city trips:
+
+- `<= 1.2 km` or `<= 18 min` flat walking
+  - same cluster by default
+- `1.2 km - 2.5 km` or `18 - 30 min` walking
+  - same cluster only if the route itself is scenic and the weather is mild
+  - otherwise prefer one light transit hop
+- `> 2.5 km` or `> 30 min` walking
+  - treat as a different cluster unless the payoff is unusually strong
+
+Taxi / transit defaults:
+
+- if the next stop is roughly `2 - 6 km` away and taxi is `<= 20 min`,
+  while public transit requires a transfer or takes `> 30 min`,
+  taxi is usually the cleaner choice unless the budget is very tight
+- treat a hop as `heavy transit` if it needs `2+ transfers`,
+  `> 35 min` total door-to-door, or obvious terrain / river / scenic-area entry friction
+- cap heavy-transit hops at about `2` per day, ideally `1` per half day
+
+Threshold adjustment rules:
+
+- reduce comfortable walking thresholds by about `30%` for luggage,
+  rain, heat, steep terrain, elders, or children
+- if the trip style is explicitly `citywalk` or `slow stroll`,
+  a scenic `20 - 25 min` walk can still count as a valid link
+  when it improves the experience rather than merely filling distance
+
 ## 3. Xiaohongshu usage rule
 
 Treat public Xiaohongshu content as a supplemental signal source, not a source of record.
@@ -188,6 +377,8 @@ Include:
 - what is destination-specific
 - what can be bought as take-home specialties
 - rough per-item price bands where helpful
+
+If the destination is food-relevant or the route includes meal planning, this section should be treated as default, not optional.
 
 ### 7) Budget
 

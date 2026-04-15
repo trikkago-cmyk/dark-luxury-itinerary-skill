@@ -34,10 +34,13 @@ Use when the source is itinerary-first.
 Structure into:
 
 - `hero`
+- `overview`
+- `packing / prep`
 - `days[]`
+- `transport / lodging`
+- `cautions`
 - `foods[]`
 - `tips[]`
-- `packing[]`
 - `budget[]`
 
 Each day should usually contain:
@@ -52,10 +55,21 @@ The overall route-guide package should usually also include:
 
 - itinerary overview
 - packing or pre-trip prep
+- daily route after prep, not before
 - transport and lodging notes
 - cautions / reminders
 - recommended foods and specialties
 - budget
+
+Default route-guide reading order:
+
+1. itinerary overview
+2. packing or pre-trip prep
+3. daily itinerary
+4. transport and lodging
+5. cautions / reminders
+6. recommended foods and specialties
+7. budget
 
 ### Memoir mode
 
@@ -87,6 +101,7 @@ Before visual polish, list:
 - optional fallback images if the first-choice scene cannot be sourced
 
 Check image targets literally against the text. If the scene is fireflies, use fireflies or a directly related garden scene, not a random animal.
+Each chosen image should be traceable to a specific section or beat; do not choose by city-name vibes alone.
 
 This is also the point where you should compare the target structure to the shipped benchmark family. If the page you are about to build would look like a text-only article rather than the Xishuangbanna / Jingshan project family, stop and fix the shot list and structural plan first.
 
@@ -143,11 +158,19 @@ If any effect stutters:
 
 When the page is visually stable:
 
-1. recommend 2 to 3 music directions
+1. recommend 2 to 4 music directions
 2. let the user choose a direction
 3. source from Pixabay or use a user-provided local file
 4. wire the track into the page
 5. verify playback behavior in a real browser
+
+Do not silently skip the music step on a travel microsite just because the user did not provide a file.
+If music is appropriate for the page family and the user has not opted out:
+
+- proactively recommend directions
+- include Pixabay search phrases
+- make a recommendation
+- if the user is unavailable and autonomy is expected, choose a safe royalty-free Pixabay direction and state that it was auto-selected
 
 Rules:
 

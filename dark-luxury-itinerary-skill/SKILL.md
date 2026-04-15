@@ -90,10 +90,11 @@ Use this when validating the skill in a brand-new empty directory and you need e
 5. Define the route-guide structure before visual polish:
    - `hero`
    - `overview`
+   - `packing / prep`
    - `days[]`
    - `transport / lodging`
-   - `packing / prep`
    - `cautions`
+   - `foods / specialties`
    - `budget`
 6. Source at least:
    - 1 Hero cover
@@ -242,6 +243,8 @@ For stronger route quality, also read:
 - `references/intent-to-itinerary-planning.md`
   This file defines multi-angle UGC search, weather-aware route swaps,
   place validation, sequencing logic, and "why worth going" recommendation framing.
+  It also defines the default query pack, confidence ladder, mainland-China map stack,
+  and walk / transit thresholds that should be used unless the trip clearly needs an override.
 
 ## Core visual system
 
@@ -282,6 +285,16 @@ A new route-guide site should normally include all of the following before it ca
 5. a structured itinerary layout that feels like the benchmark family
 6. tags with concrete place / food semantics and icons
 7. motion and mobile spacing that feel intentional, not default
+8. route-guide section order that reads cleanly on mobile:
+   - overview
+   - packing / prep
+   - daily route
+   - transport / lodging
+   - cautions
+   - food / specialties
+   - budget
+9. visible food / specialties content when the trip clearly has a food dimension
+10. if the Hero uses an overline travel mark, it should be editorially framed rather than floating as a naked label
 
 If these are missing, the result is an incomplete scaffold, not a passed cold-start website.
 
@@ -320,6 +333,16 @@ If these are missing, the result is an incomplete scaffold, not a passed cold-st
 - the scroll hint must be absolute so it never pushes the title stack
 - on mobile, the travel mark, main title, and subtitle should sit inside one shared width shell
 - if the Hero feels low on mobile, raise the entire copy cluster before tightening line-height
+
+### Overline travel mark
+
+If the Hero includes an overline label such as `YUNNAN TRAVEL`,
+`WESTERN SICHUAN ROUTE GUIDE`, or `四日三夜 · Staycation`:
+
+- default to a centered row with the text flanked by thin decorative lines
+- keep the lines subtle, long enough to read as intentional framing, and optically centered with the label
+- the label should feel like one editorial component, not a stray floating caption
+- do not omit the framing lines unless the chosen benchmark explicitly proves a cleaner alternative
 
 ### Title composition
 
@@ -413,6 +436,16 @@ For first-person story pages:
 - let all major sections rise in with the same motion language
 - do not sprinkle decorative elements just to fill space
 - if a page feels empty, first adjust spacing and typography instead of adding more objects
+- for route-guide pages, default section order is:
+  - itinerary overview
+  - packing / pre-trip prep
+  - daily itinerary
+  - transport and lodging
+  - cautions
+  - food and specialties
+  - budget
+- if packing is present, place it before the daily route rather than burying it after the itinerary
+- if the trip clearly includes eating, local snacks, or take-home recommendations, do not omit the food / specialties section
 
 ## Tags and inline details
 

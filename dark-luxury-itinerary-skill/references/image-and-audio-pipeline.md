@@ -52,6 +52,7 @@ Day / beat images should:
 - survive portrait or narrow responsive crops
 - avoid filler images
 - feel editorial rather than promotional
+- be chosen for a named section, day, or beat rather than for general city vibes
 
 Reject an image if:
 
@@ -59,6 +60,29 @@ Reject an image if:
 - it becomes muddy when blurred
 - it looks AI-generic or oversaturated
 - it fights the page’s restrained color system
+
+### Image selection record
+
+If users say the images feel random, the problem is usually that the agent sourced by destination mood instead of by section-level scene.
+To avoid this, keep a short image selection record during cold-start work.
+
+Minimum template:
+
+```md
+### Image selection record
+- target section / beat:
+  - requested scene:
+  - chosen asset:
+  - why this fit won:
+  - rejected alternative(s):
+```
+
+Rules:
+
+- every Hero image must map to the exact cover mood or place, not just the city name
+- every day / beat image must map to a specific route stop, atmosphere beat, or fallback scene
+- if you cannot explain why the image belongs to that section, do not ship it
+- for cold-start validation, record at least the Hero plus one day / beat image choice
 
 ## 4. Search strategy
 
@@ -149,19 +173,28 @@ A high-resolution editorial travel photograph of a calm lakeside boardwalk at du
 
 ## 6. Music direction workflow
 
-Before picking a track, propose 2 to 3 directions such as:
+Before picking a track, propose 2 to 4 directions such as:
 
 1. rainforest / natural ambiance
 2. soft cinematic piano-ambient
 3. distant memory / slow folk-ambient
+4. slow field-recording / soft travel dusk
 
 Each option should include:
 
 - one-line mood note
 - why it fits the page
+- a Pixabay-friendly search phrase
 - source / licensing path
 
-Then let the user choose.
+Then:
+
+- recommend one option as the best fit
+- let the user choose when interaction is possible
+- if the user is unavailable and the page family clearly suits BGM, auto-select one Pixabay-compatible direction instead of silently omitting music
+
+For cold-start outputs, silence is not the default.
+If the page supports music and the user has not opted out, the agent should proactively surface the shortlist.
 
 ## 7. Audio integration rules
 

@@ -20,6 +20,8 @@ What makes it easy to love is pretty simple:
 
 - Foolproof: give it a travel brief, and it can generate both the route guide and the page
 - Beautiful: editorial magazine aesthetics, almost zero AI-UI feel, and optional ambient background music
+- Smarter planning: it does multi-angle search, checks information confidence, and sequences the route with maps and weather instead of just stitching together a few guides
+- Better atmosphere: it matches images to specific sections and proactively suggests Pixabay-friendly music directions instead of leaving the page emotionally empty
 
 Here is what it looks like in the wild.
 
@@ -79,7 +81,15 @@ If you have ever built travel materials for yourself, your family, or a client, 
 
 This skill exists to absorb that repeated work.
 
-It helps align route structure, visual pacing, imagery, tag semantics, and music interaction first, then turns them into a travel site that is actually usable.
+It helps align route structure, research record, information confidence, map logic, weather fallback, visual pacing, imagery, tag semantics, and music interaction first, then turns them into a travel site that is actually usable.
+
+More concretely, the workflow is designed to be sturdier than “search a bit and make a page”:
+
+- search from multiple angles, not one generic query
+- separate official facts, map-backed checks, stable web results, and UGC signals
+- use maps and weather to reduce backtracking and place outdoor scenes in better windows
+- choose imagery by section-level scene targets, not random city vibes
+- proactively recommend Pixabay music directions so the final page feels intentional, not unfinished
 
 It is especially helpful for:
 
