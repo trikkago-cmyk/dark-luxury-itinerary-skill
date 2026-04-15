@@ -55,6 +55,14 @@ Public UGC can then refine:
 - queue or crowd heuristics
 - what is actually worth skipping
 
+When researching a destination, actively search across multiple user intents instead of one generic query bucket:
+
+- avoid坑 / 不推荐 / 真实体验
+- 出片 / 拍照 / 最佳时段
+- 本地人推荐 / 非游客向
+- 亲子 / 长辈 / 情侣 / 朋友出游
+- 雨天替代 / 夜间去处 / 临时 Plan B
+
 ## 3. Xiaohongshu usage rule
 
 Treat public Xiaohongshu content as a supplemental signal source, not a source of record.
@@ -99,6 +107,8 @@ For each day:
 - one-line day title
 - intro
 - timed blocks
+- a day theme
+- why this day is ordered this way
 
 For each block:
 
@@ -109,6 +119,29 @@ For each block:
 - how to get there / distance note when relevant
 - ticket / reservation note when relevant
 - 1 to 2 practical tips when needed
+- a short "why it is worth going" reason
+
+Daily sequencing rules:
+
+- cluster nearby stops before crossing the city
+- respect opening hours, meal windows, and sunset / night-scene timing
+- minimize backtracking unless the detour buys a clearly better experience
+- avoid stacking multiple heavy-transit hops in one half day
+- cap physically demanding days with a realistic walking load
+
+Place validation rules:
+
+- verify the place actually exists and is open to the public when relevant
+- capture the best available official or map-backed name
+- record coordinates or a stable map reference when the place is niche or easy to mis-pin
+- if multiple branches exist, identify the intended branch explicitly
+
+Weather adaptation rules:
+
+- check destination weather before finalizing outdoor-heavy days
+- if rain, wind, heat, or cold may materially change the experience, create a swap-ready indoor or lower-risk fallback
+- move scenic outdoor windows to the best light / weather period when possible
+- if the route depends on blossom, foliage, fireflies, beach, or night market conditions, state the seasonal uncertainty clearly
 
 ### 3) Pre-trip preparation
 
@@ -177,8 +210,21 @@ Give a range, not a fake-precision exact number.
 - keep the plan realistic by day length and transit burden
 - do not overpack every day
 - leave breathable gaps in at least some days
+- every major recommendation should answer "why this place / meal / stop is worth the time"
+- avoid itinerary lists that read like unordered POI dumps; the route should have logic
 
-## 6. Hand-off to webpage production
+## 6. Planning heuristics that should survive compression
+
+When the route is later compressed into webpage copy, preserve these decision signals whenever possible:
+
+- why a place is included
+- why the day order is structured that way
+- where the main transport burdens are
+- where weather or reservation risk could change the plan
+- what can be skipped without hurting the trip
+- what is especially suitable for the declared travel party
+
+## 7. Hand-off to webpage production
 
 Once the route guide is planned:
 

@@ -154,6 +154,14 @@ Always try to determine:
 
 If some inputs are missing, make reasonable assumptions and label them clearly in the generated plan.
 
+Before writing the actual route, the planner should explicitly reason through:
+
+- multiple public research angles, not one generic search phrase
+- weather-sensitive outdoor / indoor swaps
+- whether each place is real, reachable, and worth the detour
+- sequence by distance, transit burden, and opening-hour logic
+- a short "why it is worth going" rationale for major stops
+
 The minimum structured output should include:
 
 1. itinerary overview
@@ -228,6 +236,12 @@ If Xiaohongshu is part of the research mix:
 - summarize patterns instead of overfitting to one note
 - cross-check practical claims against more stable sources
 - avoid assuming an official note-search API exists unless you have verified one
+
+For stronger route quality, also read:
+
+- `references/intent-to-itinerary-planning.md`
+  This file defines multi-angle UGC search, weather-aware route swaps,
+  place validation, sequencing logic, and "why worth going" recommendation framing.
 
 ## Core visual system
 
