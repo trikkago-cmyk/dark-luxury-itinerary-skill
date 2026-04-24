@@ -43,6 +43,14 @@ Use these as starting patterns, not rigid templates. Keep the structure, then tu
 </main>
 ```
 
+Critical reading:
+
+- the transition should come from shared imagery and masking, not from inserting an extra strip between sections
+- leave real vertical breathing room before the second screen starts speaking
+- if the second screen appears glued directly under the cover, increase spacing before adding decoration
+- do not begin `main` with an opaque slab; the first content section should sit over the same blurred cover world
+- if the page looks like a flat black / green background after the Hero, the two-layer composition has failed
+
 ## 2. Hero title with the dot as the optical axis
 
 ```tsx
@@ -64,6 +72,13 @@ Use these as starting patterns, not rigid templates. Keep the structure, then tu
 ```
 
 If the left place name is shorter, widen the left-side tracking rather than shifting the dot.
+
+Mobile guardrails:
+
+- wrap the title in a shared width shell such as `w-[min(92vw,44rem)]`
+- use `whitespace-nowrap` on each destination phrase when the phrase should not break internally
+- reduce the clamp minimum or shorten the title before allowing isolated Chinese characters to wrap
+- never let the browser split a destination into a vertical-looking pile of characters
 
 ## 3. Scroll hint and fixed music control that do not disturb Hero centering
 
@@ -89,6 +104,13 @@ If the left place name is shorter, widen the left-side tracking rather than shif
 ```
 
 The music control must stay fixed and subtle so the Hero layout never reflows.
+
+Do not:
+
+- add tool labels that make the player look like a widget
+- let the player become visually louder than the Hero copy
+- replace the compact benchmark-family vinyl object with a new capsule or pill component
+- keep long helper text visible on mobile if it forces the player to dominate the lower corner
 
 ## 4. Inline editorial tags and itinerary pills
 
@@ -146,7 +168,111 @@ Use only restrained borders, small radii, and consistent icon sizing. Do not let
 </motion.article>
 ```
 
-## 6. Small-radius image surface with subtle parallax
+## 6. Editorial route guidance block
+
+```tsx
+type RouteNode = {
+  id: string
+  label: string
+  type: "start" | "scenic" | "food" | "stay" | "return"
+  x: number
+  y: number
+  hopLabel?: string
+  note: string
+}
+
+const routeNodes: RouteNode[] = [
+  { id: "hotel", label: "市区酒店", type: "start", x: 10, y: 78, note: "从这里出发，避免早高峰后再折返" },
+  { id: "longzhong", label: "古隆中", type: "scenic", x: 34, y: 22, hopLabel: "32 min", note: "白天历史景区，适合放在前半天" },
+  { id: "tangcheng", label: "唐城", type: "scenic", x: 78, y: 34, hopLabel: "26 min", note: "傍晚切入夜游，顺接夜场表演" },
+  { id: "dinner", label: "宜城菜馆", type: "food", x: 72, y: 76, hopLabel: "14 min", note: "夜游后就近吃饭，减少返程空驶" },
+]
+
+const [activeNodeId, setActiveNodeId] = useState(routeNodes[0].id)
+const activeNode = routeNodes.find(node => node.id === activeNodeId) ?? routeNodes[0]
+
+<section className="relative mx-auto max-w-6xl px-6 py-16 md:py-24">
+  <div className="mb-8 flex items-end justify-between gap-6">
+    <div>
+      <p className="mb-3 text-[10px] uppercase tracking-[0.34em] text-white/40">Soft Route</p>
+      <h2 className="font-serif text-2xl tracking-[0.16em] text-white/94 md:text-3xl">
+        这一天这样走，会更顺
+      </h2>
+    </div>
+    <div className="text-right text-[11px] tracking-[0.14em] text-white/48">
+      <p>从市区慢慢绕进夜色</p>
+      <p className="mt-1 text-white/68">约 58 km · 最长一段 32 min</p>
+    </div>
+  </div>
+
+  <div className="grid gap-8 rounded-[1rem] border border-white/10 bg-black/16 p-5 backdrop-blur-md md:grid-cols-[minmax(0,1.35fr)_20rem] md:p-8">
+    <div className="relative aspect-[16/10] overflow-hidden rounded-[0.9rem] border border-white/8 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.08),transparent_35%),linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))]">
+      <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full">
+        <defs>
+          <linearGradient id="routeStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="rgba(208,191,164,0.88)" />
+            <stop offset="100%" stopColor="rgba(116,137,115,0.72)" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M 10 78 C 16 52, 24 34, 34 22 S 62 18, 78 34 S 84 66, 72 76"
+          fill="none"
+          stroke="url(#routeStroke)"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          className="drop-shadow-[0_0_10px_rgba(208,191,164,0.28)]"
+        />
+      </svg>
+
+      {routeNodes.map((node) => (
+        <button
+          key={node.id}
+          type="button"
+          onMouseEnter={() => setActiveNodeId(node.id)}
+          onFocus={() => setActiveNodeId(node.id)}
+          onClick={() => setActiveNodeId(node.id)}
+          className="group absolute -translate-x-1/2 -translate-y-1/2"
+          style={{ left: `${node.x}%`, top: `${node.y}%` }}
+        >
+          <span className="absolute inset-0 rounded-full bg-[#0a0f0c] blur-md" />
+          <span className="relative block h-3.5 w-3.5 rounded-full border border-[#dbc3a0] bg-[#0a0f0c] transition duration-300 group-hover:bg-[#dbc3a0] group-focus-visible:bg-[#dbc3a0]" />
+          <span className="mt-3 block whitespace-nowrap text-[10px] uppercase tracking-[0.22em] text-white/62">
+            {node.label}
+          </span>
+        </button>
+      ))}
+    </div>
+
+    <div className="rounded-[0.9rem] border border-white/8 bg-white/[0.03] p-5">
+      <p className="text-[10px] uppercase tracking-[0.3em] text-white/38">Now Hovering</p>
+      <h3 className="mt-4 font-serif text-xl tracking-[0.12em] text-white/92">{activeNode.label}</h3>
+      {activeNode.hopLabel && (
+        <p className="mt-2 text-[11px] tracking-[0.16em] text-[#cfb993]">{activeNode.hopLabel} from previous stop</p>
+      )}
+      <p className="mt-4 text-sm leading-7 text-white/60">{activeNode.note}</p>
+    </div>
+  </div>
+</section>
+```
+
+Rules:
+
+- use a schematic or stylized path, not a cluttered app screenshot
+- node labels must stay sparse enough to avoid overlap
+- the summary panel should explain route logic, not just repeat the place name
+- mobile can stack the diagram and summary, but tap targets must remain usable
+- if this section starts reading like an operations panel, strip it back to a lighter overview treatment
+- prefer visible titles such as `怎么走更顺` or `这一天这样排` over hard technical labels
+- never render raw planning labels such as `THERE-AND-BACK`, `CLEAN LOOP`, `route topology`, or `backtracking-heavy`
+- show start / finish and route direction with subtle labels or arrows when the path is not obvious
+- if the right-side panel becomes a list of metrics, replace it with one warm sentence about why the route is comfortable
+- if the diagram cannot meet the benchmark family's polish, omit it and keep only a short route note
+- if support information around this section starts multiplying into several neighboring boxes, merge it into one calmer editorial block instead
+
+Use this block only when the route genuinely benefits from explanation.
+For a simple citywalk or one-cluster staycation, fold the guidance back into overview + daily text instead of forcing a standalone section.
+
+## 7. Small-radius image surface with subtle parallax
 
 ```tsx
 <div className="group/img relative aspect-[5/6] w-full max-w-[22rem] overflow-hidden rounded-[0.95rem] border border-white/10 bg-black/30 shadow-[0_28px_90px_rgba(0,0,0,0.42)]">
@@ -162,7 +288,7 @@ Use only restrained borders, small radii, and consistent icon sizing. Do not let
 
 Fill the frame completely. Large empty inner margins usually mean the crop container or image sizing is wrong.
 
-## 7. Minimal editorial surface rules
+## 8. Minimal editorial surface rules
 
 ```tsx
 const sectionTitleClassName =
@@ -172,7 +298,7 @@ const ghostNumberClassName =
   "absolute top-24 left-6 text-[8rem] font-serif font-thin text-white/5 select-none pointer-events-none leading-none -translate-y-1/2";
 ```
 
-## 8. Ambient audio engine notes
+## 9. Ambient audio engine notes
 
 Use one of these two paths:
 
@@ -186,7 +312,7 @@ Rules:
 - never block the page if audio fails
 - do not ship a copyrighted track without a real license or user-provided file
 
-## 9. Practical tuning notes
+## 10. Practical tuning notes
 
 - If the transition still shows a seam, remove layers before adding layers.
 - If the Hero looks muddy, the clear image is too dim or accidentally blurred.
@@ -195,7 +321,7 @@ Rules:
 - If the page feels wrong after a rename, check whether metadata, project slug, and public alias all moved together.
 - If a day image feels off, fix the shot list before continuing to polish the UI.
 
-## 10. Font delivery recipes for Vite travel pages
+## 11. Font delivery recipes for Vite travel pages
 
 The fastest way to accidentally bloat a cold-start build is to import full CJK font packages in multiple weights.
 

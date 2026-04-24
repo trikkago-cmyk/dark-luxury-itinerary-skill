@@ -53,6 +53,7 @@ Day / beat images should:
 - avoid filler images
 - feel editorial rather than promotional
 - be chosen for a named section, day, or beat rather than for general city vibes
+- still feel beautiful after the destination is identified
 
 Reject an image if:
 
@@ -60,6 +61,46 @@ Reject an image if:
 - it becomes muddy when blurred
 - it looks AI-generic or oversaturated
 - it fights the page’s restrained color system
+- it has a visible watermark, date stamp, screenshot chrome, or archive-like record noise
+- it only proves the place exists but brings no light, depth, or emotional pull
+- the sky is dull, the framing is surveillance-like, or the overall read is flat and documentary when the page needs softness
+
+### Editorial beauty filter
+
+Every chosen asset must pass two tests:
+
+1. `semantic fit`
+   - is this truly the place, beat, or atmosphere the copy is talking about
+2. `editorial beauty`
+   - would this still feel intentional if it were printed as a full-width spread in the benchmark family
+
+If two assets are equally correct, choose the one with:
+
+- stronger natural light or more legible shadows
+- clearer focal subject
+- better depth for blur and crop reuse
+- less clutter from tourists, signage, vehicles, or utility lines
+- more emotional pull, texture, or aftertaste
+
+Do not lock a flat image just because it is “accurate enough”.
+The recurring failure mode in cold-start route guides is `correct but plain`.
+That still reads as unfinished.
+
+### Support spread rules
+
+Support imagery for overview / aftertaste sections may be slightly less literal than a day anchor image, but it still needs a clear narrative job.
+
+Good support images usually do one of these:
+
+- hold the port / street / temple atmosphere of the next cluster
+- give the page a breathing beat between dense text sections
+- preserve a destination texture that the user will recognize emotionally, even if it is not a ticketed stop
+
+Bad support images usually do this instead:
+
+- repeat the same flat frontal building shot the main day image already covered
+- feel like a tourism brochure attachment
+- introduce a random city-vibe picture with no section-level relationship
 
 ### Image selection record
 
@@ -81,6 +122,7 @@ Rules:
 
 - every Hero image must map to the exact cover mood or place, not just the city name
 - every day / beat image must map to a specific route stop, atmosphere beat, or fallback scene
+- every support spread must map to a section-level role such as `overview breath`, `south-line texture`, or `closing aftertaste`
 - if you cannot explain why the image belongs to that section, do not ship it
 - for cold-start validation, record at least the Hero plus one day / beat image choice
 
@@ -192,9 +234,22 @@ Then:
 - recommend one option as the best fit
 - let the user choose when interaction is possible
 - if the user is unavailable and the page family clearly suits BGM, auto-select one Pixabay-compatible direction instead of silently omitting music
+- record a music provenance note before shipping:
+  - chosen direction
+  - search phrase
+  - source page URL or local-file origin
+  - final stored project path
+  - file hash
+  - whether reuse was explicitly approved
 
 For cold-start outputs, silence is not the default.
 If the page supports music and the user has not opted out, the agent should proactively surface the shortlist.
+
+Human-facing rule:
+
+- music should be introduced as mood companionship, not as a technical feature checklist
+- recommend it in the same tone as the page, for example `这页更适合雨林白噪音` or `这页更适合慢一点的钢琴氛围`
+- do not make the recommendation block feel like a settings panel
 
 ## 7. Audio integration rules
 
@@ -215,6 +270,9 @@ UI rules:
 - clicking the disc should toggle play / pause
 - if a tonearm is shown, it must visibly drop on play and lift on pause
 - repeated toggles must continue working after the first interaction
+- do not rename an older project track and pass it off as a newly sourced cold-start asset
+- if the chosen file hash matches another project and reuse was not explicitly approved, reject it and source a fresh track
+- the control should feel like part of the page atmosphere, not a foreign widget
 
 ## 8. Local file replacement
 
@@ -224,6 +282,7 @@ If the user provides a local file:
 - update the app to reference the new asset
 - verify the file actually loads in the browser
 - verify playback state, pause state, and re-toggle behavior
+- record the original local path and final hash in the provenance note
 
 ## 9. Copyright and fallback policy
 
@@ -243,3 +302,4 @@ Before shipping:
 - UI state matches audio state
 - fixed player does not dominate the mobile viewport
 - the final page does not depend on a brittle third-party image hotlink
+- music provenance exists and can explain where the shipped track came from
